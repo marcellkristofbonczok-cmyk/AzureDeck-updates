@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "product": "AzureDeck",
+  "architecture": "x64",
+  "version": "1.8.1",
+  "url": "https://github.com/marcellkristofbonczok-cmyk/AzureDeck-updates/releases/download/v1.8.1/AzureDeck.exe",
+  "sha256": "bdac0077f790b2e17f69bcc77f342d0e00d508cba2f4a215c7560336125ee2aa",
+  "size": 2271232,
+  "notes": "AzureDeck 1.8.1 connects automatic update checks to this GitHub repository. Existing custom sources and disabled update checks are preserved. Includes the verified in-app updater and Auto multi-instance controls from 1.8."
+}

@@ -32,7 +32,8 @@ jobs:
           if ($m.size -ne $file.Length -or $file.Length -gt 67108864) { throw 'Release size mismatch.' }
           if ((Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant() -ne $m.sha256) { throw 'Release SHA-256 mismatch.' }
           $v = [Diagnostics.FileVersionInfo]::GetVersionInfo($file.FullName)
-          if ($v.ProductName -ne 'AzureDeck' -or [version]$v.FileVersion -ne [version]("$($m.version).0")) { throw 'Executable product/version mismatch.' }
+          $normalizedVersion = if (($m.version -split '\\.').Count -eq 3) { "$($m.version).0" } else { $m.version }
+          if ($v.ProductName -ne 'AzureDeck' -or [version]$v.FileVersion -ne [version]$normalizedVersion) { throw 'Executable product/version mismatch.' }
           $existing = gh release view $tag --repo $env:GITHUB_REPOSITORY --json tagName 2>$null
           if ($LASTEXITCODE -eq 0) { throw 'This version already exists. Increment the version; published releases are never overwritten.' }
           gh release create $tag dist/AzureDeck.exe dist/update.json --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --title "AzureDeck $($m.version)" --notes-file dist/release-notes.md --latest
