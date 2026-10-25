@@ -1,15 +1,9 @@
-# AzureDeck 1.8.1
+AzureDeck 1.8.2 fixes multi-account startup reporting and monitoring.
 
-- Connects automatic update checks to this GitHub repository.
-- Migrates an unconfigured 1.8 update source while preserving custom feeds and disabled checks.
-- Includes the in-app verified download/install/restart flow and Auto multi-instance from 1.8.
+- Wait for account-matched server-join evidence before advancing the launch queue; show confirmed, failed, unconfirmed and skipped counts in Discord and the app.
+- Detect critical-settings errors and retry only the failed new client, with fresh tickets and bounded backoff. Unverified live clients remain open.
+- Apply monitoring switches immediately and restore already-minimized managed windows when Prevent Minimization is enabled, respecting exclusions.
+- Fix duplicate restoration caused by delayed minimize events.
+- Improve small-window OCR, use matched client logs for minimized disconnects, and show inspection/capture counters plus Check clients now.
 
-For AzureDeck 1.8, set this manifest URL in Settings > App updates, save it, then check for updates:
-
-https://github.com/marcellkristofbonczok-cmyk/AzureDeck-updates/releases/latest/download/update.json
-
-Close Roblox clients before installing. Accounts and settings remain in LocalAppData/AzureDeck.
-
-Validation: 388 core/integration checks, 20 widget/audio/scroll checks, 16 native hotkey checks, and 5 native executable-replacement/restart checks passed (429 total).
-
-Licenses and third-party notices are available in the repository.
+Roblox network outages cannot be repaired by the manager. Unsupported log formats remain unconfirmed rather than being reported as successful. Install through Settings > App updates; account data is preserved.
