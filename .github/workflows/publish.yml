@@ -2,7 +2,7 @@ name: Publish AzureDeck update
 on:
   push:
     branches: [main]
-    paths: ['dist/**']
+    paths: ['dist/**', '.github/workflows/publish.yml']
   workflow_dispatch:
 permissions:
   contents: write
@@ -32,7 +32,7 @@ jobs:
           if ($m.size -ne $file.Length -or $file.Length -gt 67108864) { throw 'Release size mismatch.' }
           if ((Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant() -ne $m.sha256) { throw 'Release SHA-256 mismatch.' }
           $v = [Diagnostics.FileVersionInfo]::GetVersionInfo($file.FullName)
-          $normalizedVersion = if (($m.version -split '\\.').Count -eq 3) { "$($m.version).0" } else { $m.version }
+          $normalizedVersion = if ($m.version.Split('.').Count -eq 3) { "$($m.version).0" } else { $m.version }
           if ($v.ProductName -ne 'AzureDeck' -or [version]$v.FileVersion -ne [version]$normalizedVersion) { throw 'Executable product/version mismatch.' }
           $existing = gh release view $tag --repo $env:GITHUB_REPOSITORY --json tagName 2>$null
           if ($LASTEXITCODE -eq 0) { throw 'This version already exists. Increment the version; published releases are never overwritten.' }
