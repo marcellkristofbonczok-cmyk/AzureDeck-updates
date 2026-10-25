@@ -1,0 +1,39 @@
+name: Publish AzureDeck update
+on:
+  push:
+    branches: [main]
+    paths: ['dist/**']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: azuredeck-release
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate and publish release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $m = Get-Content -Raw -LiteralPath dist/update.json | ConvertFrom-Json
+          if ($m.schema -ne 1 -or $m.product -ne 'AzureDeck' -or $m.architecture -ne 'x64') { throw 'Invalid AzureDeck manifest.' }
+          if ($m.version -notmatch '^[0-9]{1,5}(\.[0-9]{1,5}){2,3}$') { throw 'Invalid version.' }
+          $tag = 'v' + $m.version
+          $expected = "https://github.com/$env:GITHUB_REPOSITORY/releases/download/$tag/AzureDeck.exe"
+          if ($m.url -ne $expected) { throw 'Manifest URL does not match this repository and version.' }
+          $file = Get-Item -LiteralPath dist/AzureDeck.exe
+          if ($m.size -ne $file.Length -or $file.Length -gt 67108864) { throw 'Release size mismatch.' }
+          if ((Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant() -ne $m.sha256) { throw 'Release SHA-256 mismatch.' }
+          $v = [Diagnostics.FileVersionInfo]::GetVersionInfo($file.FullName)
+          if ($v.ProductName -ne 'AzureDeck' -or [version]$v.FileVersion -ne [version]("$($m.version).0")) { throw 'Executable product/version mismatch.' }
+          $existing = gh release view $tag --repo $env:GITHUB_REPOSITORY --json tagName 2>$null
+          if ($LASTEXITCODE -eq 0) { throw 'This version already exists. Increment the version; published releases are never overwritten.' }
+          gh release create $tag dist/AzureDeck.exe dist/update.json --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --title "AzureDeck $($m.version)" --notes-file dist/release-notes.md --latest
+          if ($LASTEXITCODE -ne 0) { throw 'Release publication failed.' }
