@@ -2,9 +2,9 @@
   "schema": 1,
   "product": "AzureDeck",
   "architecture": "x64",
-  "version": "1.8.2",
-  "url": "https://github.com/marcellkristofbonczok-cmyk/AzureDeck-updates/releases/download/v1.8.2/AzureDeck.exe",
-  "sha256": "8df208404bab01665347ee8da7819a517a7820d6b298fea4dd653ee9e517198a",
-  "size": 2301952,
-  "notes": "AzureDeck 1.8.2 fixes multi-account startup reporting and monitoring.\n\n- Wait for account-matched server-join evidence before advancing the launch queue; show confirmed, failed, unconfirmed and skipped counts in Discord and the app.\n- Detect critical-settings errors and retry only the failed new client, with fresh tickets and bounded backoff. Unverified live clients remain open.\n- Apply monitoring switches immediately and restore already-minimized managed windows when Prevent Minimization is enabled, respecting exclusions.\n- Fix duplicate restoration caused by delayed minimize events.\n- Improve small-window OCR, use matched client logs for minimized disconnects, and show inspection/capture counters plus Check clients now.\n\nRoblox network outages cannot be repaired by the manager. Unsupported log formats remain unconfirmed rather than being reported as successful. Install through Settings > App updates; account data is preserved."
+  "version": "1.8.3",
+  "url": "https://github.com/marcellkristofbonczok-cmyk/AzureDeck-updates/releases/download/v1.8.3/AzureDeck.exe",
+  "sha256": "ddd54ebca7887b629c25ff2bc92aa1caea35a819bc0c5643390bce79faa53600",
+  "size": 2333696,
+  "notes": "AzureDeck 1.8.3\n\n- Fix cross-account cookie reuse: isolate every HTTP request and verify account identity before requesting a launch ticket.\n- Preserve live clients on ordinary Launch; protect recovery against stale or duplicate requests. Use Rejoin explicitly to replace a client.\n- Stop automatic window shrinking by default; make 640x360 resizing optional.\n- Autosave settings, hotkeys, encrypted Discord fields and FPS without Save buttons. FPS applies at the next launch after all clients close.\n- Add Copy config and Import config from clipboard in Settings. Credentials, account sessions, private links and the update source remain local.\n\n506 regression checks passed, plus read-only stored-session identity verification. Install through Settings > App updates; existing account data is preserved."
 }

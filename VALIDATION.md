@@ -1,21 +1,22 @@
-# AzureDeck 1.8.2 validation
+# AzureDeck 1.8.3 validation
 
-Built on 2026-10-25 for Windows x64 using MSVC, C++20, /O2, static /MT, Windows SDK 10.0.26100.0, version resources and the embedded asInvoker manifest. Application and all test/probe targets compiled. CMake version metadata was updated but CMake was not executed. The two pre-existing unused tray-helper warnings remain in the standalone hotkey tests.
+Built on 2026-10-25 for Windows x64 using MSVC, C++20, /O2, static /MT, Windows SDK 10.0.26100.0, version resources and an embedded asInvoker manifest. The final complete PowerShell build succeeded. CMake version metadata was updated; CMake was not executed. Only the two existing unused tray-helper warnings remain in the hotkey test target.
 
-- Core/integration: **408 passed, 0 failed**.
+- Core/integration: **428 passed, 0 failed**.
 - ImGui/audio/scroll: **20 passed, 0 failed**.
-- Native hotkey registration/routing: **16 passed, 0 failed**.
-- Native startup, capture/OCR, minimization and log fallback: **35 passed, 0 failed**.
-- Native executable replacement/restart: **5 passed, 0 failed**.
-- Total: **484 passed, 0 failed**.
+- Native hotkey routing: **16 passed, 0 failed**.
+- Native startup/capture/OCR/restoration/log monitoring: **35 passed, 0 failed**.
+- Native window sizing: **2 passed, 0 failed**.
+- Native updater replacement/restart: **5 passed, 0 failed**.
+- Total regression checks: **506 passed, 0 failed**.
 
-The first native run exposed a delayed-minimize-event race. The restoration logic was corrected, and the complete native probe passed on the final build. A Windows macro collision in a probe variable was corrected; test-target compilation resumed successfully with the same final application/object files. The cancellation expectation now asserts that a skipped account cannot produce an all-success result.
+New coverage uses a loopback HTTP server to seed a shared WinHTTP cookie cache, then verifies that isolated account requests send only their explicitly supplied cookie and an anonymous request sends none. Identity checks reject wrong accounts, expired sessions and malformed responses before launch-ticket creation. Clipboard tests verify portable settings/preferences round trips, preservation of private local fields, and rejection of malformed, unsupported or invalid configuration values. Settings save successfully with the account worker deliberately blocked. Discord drafts save without requiring a connection.
 
-New regression coverage includes account/place log identity, stale logs, partial records, creator text, ambiguity, truncation, connection transitions, native critical-settings failure detection, false-success prevention, cancellation, 640x360 OCR, restoration without focus, per-account exclusions, rapid minimize events, and minimized log detection with zero screen captures. Immediate monitoring settings were tested with a blocked command worker and an older queued settings save.
+Native window fixtures verify that ordinary optimization preserves position and dimensions, while explicit resizing reduces dimensions without moving the window. Existing monitor fixtures verify minimized restoration, exclusions, fresh captures, potato-size OCR and minimized log detection. The updater test preserves a synthetic vault and verifies replacement, backup and restart using disposable executables.
 
-Monitoring and account pages were rendered with 100 synthetic accounts at 100% and 150% UI scaling. No account data was included in the preview. The updater probe used disposable old/new executables, preserved a synthetic vault sentinel, and verified backup, replacement, restart, and paths containing spaces.
+Settings and account pages were rendered with synthetic data at 100% and 150% scaling; config controls and removal of manual settings-save buttons were visually checked. A separate read-only verification of existing account sessions succeeded using the corrected HTTP implementation. It did not launch game clients, request launch tickets, alter account sessions or display credentials.
 
-Final executable: 2,301,952 bytes, version 1.8.2.0.
-SHA-256: 8df208404bab01665347ee8da7819a517a7820d6b298fea4dd653ee9e517198a
+Final executable: 2,333,696 bytes; version 1.8.3.0.
+SHA-256: ddd54ebca7887b629c25ff2bc92aa1caea35a819bc0c5643390bce79faa53600
 
-Live authenticated Roblox launches and real disconnect dialogs were not exercised against the user's accounts. Roblox log formats, network behavior, Windows capture support and installed OCR languages remain external dependencies. Missing verification evidence is reported as unconfirmed, never success. See docs/RELEASE-1.8.2.md.
+Live multi-account game launches were not performed. Roblox client behavior, service availability, server access and Windows capture/OCR remain external dependencies. Wrong identities are blocked, unverifiable joins remain unconfirmed, and existing live clients are preserved by ordinary Launch. See docs/RELEASE-1.8.3.md.
