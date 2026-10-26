@@ -16,6 +16,10 @@ For AzureDeck 1.8, paste that URL into **Settings > App updates > Update manifes
 
 Updates are checked on startup and every six hours when enabled. A new version is published only after it is built and tested; connecting GitHub does not generate app changes automatically.
 
+## 1.9.12 changes
+
+Launching/rejoining and recovery now use **%LOCALAPPDATA%\Bloxstrap\Bloxstrap.exe** for the current Windows user. Install and finish Bloxstrap setup first. AzureDeck prepares updates before requesting fresh account tickets, sends account-specific public/private-server launch URIs, and tracks the actual player through an owned process job and matching join logs. Cancelled/timed-out jobs remain tracked to prevent duplicates. Recovery asks Bloxstrap to update, then force-reinstall its managed Player if needed; AzureDeck no longer deletes the Roblox folder or uses its stock installer. Settings includes launcher setup links, and potato flags use Bloxstrap's persistent modifications folder. **740 regression/inspection/artifact checks and eight UI previews passed.** Real Bloxstrap/game launches were not executed during validation. See [release details](docs/RELEASE-1.9.12.md) and [validation](VALIDATION.md).
+
 ## 1.9.11 changes
 
 Modern installer Critical Error dialogs and temporary helper errors are now detected. Failed installers close automatically, with verified forced closure after ten seconds if graceful exit fails. Recovery reruns a fresh official launcher to update first; if that update or its next client launch still fails, it performs the full clean reinstall and retries. Failure after both attempts completes the waiting launch and shows a clear needs-attention status. The clean fallback still removes Studio/local Roblox data and reinstalls Player only. **711 compiled/native checks and eight UI previews passed**, including modern TaskDialog, stubborn-installer termination and unrelated healthy-updater protection. Real installers were not run or closed during validation. See [release details](docs/RELEASE-1.9.11.md) and [validation](VALIDATION.md).
