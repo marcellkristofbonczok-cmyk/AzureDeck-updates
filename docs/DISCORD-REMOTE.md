@@ -35,14 +35,15 @@ Quote names containing spaces: `!select "group:Farm Two"`. You can use single or
 !group create Farm
 !group add Farm Alpha Beta
 !group add Farm group:OtherGroup
-!group remove Alpha Beta
+!group remove Farm Alpha Beta
+!group clear account:Alpha
 !group rename Farm "Farm Two"
 !group delete "Farm Two"
 ```
 
-Each account belongs to one group. Assignment moves accounts from their previous group. Empty named groups persist. Renaming updates member records; deletion clears membership and **keeps the accounts and sessions**. Multi-target assignment validates every target before saving. Commands accept up to eight arguments, so one add command can name up to six selectors. A selector may itself name a group or all accounts.
+Accounts can belong to any number of groups. Adding keeps every existing membership. Named removal removes only that group; `!group clear <target>...` removes all memberships from those accounts. The old one-target `!group remove <target>` form still clears all memberships. Empty named groups persist. Renaming updates member records; deletion removes only that membership and **keeps the accounts and sessions**. Multi-target assignment validates every target before saving. Commands accept up to eight arguments, so one add command can name up to six selectors. A selector may itself name a group or all accounts.
 
-On the desktop, select account checkboxes and open **Accounts > Manage groups**. Create/choose a group, then assign the selected accounts. Rename, ungroup and delete controls are in the same dialog. Existing group text fields and group filters keep working.
+On the desktop, select account checkboxes and open **Accounts > Manage groups**. Create/choose a group, then assign the selected accounts. Remove selected members from the chosen group, or use Remove beside an individual member. Rename and delete controls are in the same dialog. Group filters search all memberships.
 
 ## Launch and control clients
 

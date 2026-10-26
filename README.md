@@ -16,6 +16,10 @@ For AzureDeck 1.8, paste that URL into **Settings > App updates > Update manifes
 
 Updates are checked on startup and every six hours when enabled. A new version is published only after it is built and tested; connecting GitHub does not generate app changes automatically.
 
+## 1.9.6 changes
+
+Accounts retain multiple group memberships. Use Accounts > Manage groups to remove selected or individual members from just one group. Add account and scrollbars now stay within padded content; controls wrap and layouts adapt at smaller window sizes and larger text. Copy config uses verified native Unicode clipboard writes and transfers all app settings, private URLs and layouts; account sessions and Discord sign-in stay separate. **606 compiled/native checks passed**, plus 32 final layout/scroll preview cases. See [release details](docs/RELEASE-1.9.6.md) and [validation](VALIDATION.md).
+
 ## 1.9.5 changes
 
 Discord now has account/group/all targets, independent numbered pickers, persistent account groups, broader non-secret app controls and colored cards. Long operations update one pending message while other commands remain available. Start with `!help` or `!select`; read the [command guide](docs/DISCORD-REMOTE.md). **591 regression checks passed.** See [release details](docs/RELEASE-1.9.5.md) and [validation](VALIDATION.md).
