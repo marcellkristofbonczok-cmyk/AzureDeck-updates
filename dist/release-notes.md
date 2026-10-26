@@ -1,13 +1,21 @@
-# AzureDeck 1.9.8 — Stop repeated Roblox installer failures
+# AzureDeck 1.9.9 — Automatic update, fresh reinstall and retry
 
-An installer/critical-settings failure now blocks further native launch attempts instead of repeating that failure for every account. The queue stops with honest confirmed/failed/unattempted counts, keeps unattempted accounts queued, and remembers the installation block across app restarts. Automatic recovery also waits. Repeating a blocked batch returns promptly.
+On an installer/critical-settings launch failure, recovery now runs automatically:
 
-The manager chooses the newest complete installed player by executable version; an older registered path no longer overrides a newer complete bundle. Launch preflight checks for required player files, open installers and files still being written before obtaining tickets or replacing a client. Normal direct-player launching remains in use.
+1. Close verified Roblox player instances for the current Windows user/session, including instances outside the selected queue.
+2. Temporarily release multi-instance compatibility and wait for or run the official updater.
+3. Restore compatibility and retry the failed account with a fresh ticket.
+4. If the update fails or the retried client still fails, download a fresh official Roblox installer, verify its Roblox Corporation Windows signature, reinstall, and retry again.
+5. If the fresh reinstall or its subsequent retry fails, keep launches blocked instead of repeating forever.
 
-Startup follows installer child processes even when the original player exits. Such a handoff is not counted as a game launch. Critical-settings errors no longer trigger repeated automatic restarts. Only the failed new player uses the existing owned-process cleanup; installer processes and other working clients are not globally terminated.
+The selected batch is rebuilt after recovery so accounts closed earlier are launched again; prior counts are replaced by final outcomes. Clients outside the selected batch remain closed. AzureDeck's saved accounts, sessions and settings are preserved.
 
-If blocked, finish or repair Roblox and close the installer/error windows. Open Settings > Launch & recovery > Recheck installation, or use the same button in the Launch center. A successful recheck clears the installation pause so you can retry selected accounts. It checks local readiness; it does not repair missing assets, bypass Roblox's required updates or confirm an online join.
+The automatic setting is on by default under Settings > Launch & recovery. Repair now, Recheck installation and Cancel repair are also available. Progress remains visible and status/Discord commands stay responsive. Cancelling stops the wait; a running updater is allowed to finish so its writes are not interrupted.
 
-If the official installer still fails independently of AzureDeck, follow [Roblox's desktop troubleshooting guide](https://en.help.roblox.com/hc/en-us/articles/203312870-General-Desktop-Roblox-Issues). Roblox also documents the [infinite installation loop](https://en.help.roblox.com/hc/en-us/articles/203312940-Infinite-Getting-Latest-Roblox-Loop) as an installation problem.
+Recovery allows one update and one fresh reinstall per episode. A confirmed healthy join plus a 30-minute cooldown permits a later independent episode. An explicit manual retry can reset the budget. Failed state writes retain the launch block and exhausted retry budget.
 
-See VALIDATION.md for executed synthetic process, batch, native monitoring, updater and UI checks. No live account was launched and the user's failing installer was not reproduced by running a real installer during validation.
+Downloads use the official HTTPS host with no account cookies or redirects, a 64 MB cap and publisher/signature verification before execution. Only AzureDeck's downloaded staging copy is cleaned up. The installed Roblox updater is kept intact so future updates and repairs remain possible.
+
+Roblox describes reinstalling as replacing broken or deleted files in its [official reinstall guide](https://en.help.roblox.com/hc/en-us/articles/203312910-How-Do-I-Reinstall-the-Roblox-Software/). This is an official overwrite reinstall; AzureDeck does not delete its account vault or Roblox's installed updater.
+
+See VALIDATION.md for executed checks. The official download/signature were verified without running the installer. Recovery/queue behavior was tested with injected synthetic operations; no real installation was changed and no live account was launched during validation.
