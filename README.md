@@ -16,6 +16,10 @@ For AzureDeck 1.8, paste that URL into **Settings > App updates > Update manifes
 
 Updates are checked on startup and every six hours when enabled. A new version is published only after it is built and tested; connecting GitHub does not generate app changes automatically.
 
+## 1.9.8 changes
+
+Roblox installer/critical-settings failures now stop further account launches and preserve unattempted queued accounts. Startup follows installer child processes after the player exits; discovery prefers the newest complete installed player over stale registration. The installation block survives restarts. After finishing or repairing Roblox, use **Settings > Launch & recovery > Recheck installation** and retry selected accounts. This protects AzureDeck from repeated attempts; it does not repair Roblox or bypass required updates. **636 compiled/native checks and eight final UI previews passed.** See [release details](docs/RELEASE-1.9.8.md) and [validation](VALIDATION.md).
+
 ## 1.9.7 changes
 
 Group management now has its own searchable tick/untick account selector, aligned name/ID rows and a header X. Settings is organized into nine categories with a responsive rail/dropdown and independent editors. Config transfer is under **Settings > Data & config**. **568 compiled/native checks and 42 final app preview/interaction cases passed.** See [release details](docs/RELEASE-1.9.7.md) and [validation](VALIDATION.md).

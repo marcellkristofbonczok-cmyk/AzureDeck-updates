@@ -1,25 +1,27 @@
-# AzureDeck 1.9.7 validation
+# AzureDeck 1.9.8 validation
 
-Built and checked on 2026-10-26 for Windows x64 using MSVC C++20, /O2, static /MT, Windows SDK, version resources, application icon and asInvoker manifest. The complete build and compiled suites passed. The final UI padding/label adjustment was rebuilt successfully and all final preview cases use that exact executable. CMake metadata was updated; CMake was not executed. Only the two existing unused tray-helper warnings remain in the hotkey target.
+Built and checked on 2026-10-26 for Windows x64 with MSVC C++20, /O2, static /MT, Windows SDK, version resources, application icon and an asInvoker manifest. The complete final PowerShell build passed. CMake was updated but not executed. Only the two existing unused tray-helper warnings remain in the hotkey target.
 
-- Core/integration: **518 passed, 0 failed**.
+- Core/integration: **539 passed, 0 failed**.
 - ImGui/audio/scroll/layout: **29 passed, 0 failed**.
 - Native hotkeys: **16 passed, 0 failed**.
+- Native installer process-tree probe: **6 passed, 0 failed**.
+- Native startup/capture/OCR/restoration/log monitoring: **41 passed, 0 failed** on repeat.
 - Native updater replacement/restart: **5 passed, 0 failed**.
-- Total compiled/native checks executed for this release: **568 passed, 0 failed**.
-- Final app previews/interactions: **42 passed**.
+- Total final executed compiled/native checks: **636 passed, 0 failed**.
+- Final installation-protection UI previews: **8 passed**.
 
-The new widget checks verify clicking a membership row to add/remove, disabled-row behavior, and room for the aligned name/ID block at 100% and 150% text scale. Existing custom button, slider, checkbox, combo, animation, audio and scrolling checks remain passing. Existing group migration, additive membership, named removal, unrelated-membership preservation, atomic validation and encrypted persistence tests remain in the core suite.
+Installation tests cover newest complete version selection over stale registration, equal-version registry preference, partial/missing bundle rejection, direct/grandchild installer lineage, unrelated processes, creation-time checks, reused root PIDs, children created after root exit and unknown identities. The persistent latch blocks before player discovery or account authentication, survives restart and fails closed on corrupt state. A three-account synthetic batch with retry limit five stops after one nonretryable result, preserves two unattempted accounts in memory/on disk, and remains paused. Repeating it returns promptly instead of hanging behind that automatic pause. No real Roblox ticket or client is used.
 
-The final app uses 18 synthetic accounts in isolated encrypted data directories. At both 100% and 150% scale, previews exercise all nine Settings categories and group management at 1000x700, scrolling through Launch & recovery, Window monitoring and Data & config, clicking the first membership twice to remove then re-add just Farm while retaining Trading, and clicking the modal header X. The main-library selection is checked after the group interactions and stays unchanged. General, Launch & recovery, Data & config, group management and Accounts also render at 1260x940 at each scale. Bounds checks keep editors, group rows, list and footer within the window; native hit testing remains HTCLIENT inside the content area. Screenshots of the final small and wide layouts and aligned group rows were visually reviewed.
+The native installer probe copies its own disposable executable to RobloxPlayerInstaller.exe, starts it through a synthetic parent that exits, and verifies that retained process identity still associates the child. Startup reports an installation problem rather than a successful join or generic player exit. Global preflight sees the open installer; recheck cannot clear a latched failure while it runs. The fixture exits naturally. No real installer is started or terminated.
 
-A source review against the prior packaged source confirms all 38 prior toggle/numeric Settings fields plus destination/default-group/webhook/default-page controls, monitoring, hotkeys, config transfer, update and backup actions remain reachable. The normal Settings root has no extra outer scrolling canvas; each category editor handles its own scrolling. Configuration clipboard behavior and all automatic saving/storage implementations are retained.
+Native monitoring regressions verify critical-settings dialogs, startup join evidence, 769/278/267 OCR, capture, targeted inspections, restoration and minimized account-matched logs. An initial run passed 40/41 but failed the foreground-preservation observation on the active desktop; the complete repeat passed 41/41 without changes to the restoration code. Final counts above use that repeat. The updater fixture verifies replacement, previous-binary backup, restart and independent synthetic account data.
 
-The native updater fixture verifies replacement by a strictly newer payload, previous-binary backup, restart, paths with spaces and preservation of separate synthetic account data. No real Roblox client or account is started by that fixture.
+Final app previews use isolated encrypted fixtures with 18 synthetic accounts and a latched installation reason. Launch & recovery and the blocked Accounts launch center render at 1260x940 at 100% and 150% scale. The installation editor also renders and scrolls at 1000x700 at both scales. Frame/editor bounds, native HTCLIENT hit testing and actual wheel scrolling pass. The final installation/recheck layouts were visually reviewed. The final UI executable hash matches the release payload.
 
-Final executable: **2,604,032 bytes**, version **1.9.7.0**.
-SHA-256: **ce965fe6915223c44fe260ac5f79b73977c84a835e45798a6e8b0cf5bdcce5cd**.
+Final executable: **2,627,072 bytes**, version **1.9.8.0**.
+SHA-256: **9705e234b0f0dfb2db6bbcc683af112b9d7ffc14d02ae17055c2bee3906c37ee**.
 
-Live Discord delivery, actual channel permissions, real browser sign-in, in-game Anti-AFK and live multi-account joins were not exercised. The existing ten-client native Roblox Home logout remains unproven fixed. Window capture/OCR/restoration, window sizing, WebView2 and the three-minute cleanup probes were not rerun because their implementations were not changed. The separate 41 monitoring and two sizing checks last passed in 1.9.6; see docs/VALIDATION-1.9.6.md. Those prior counts are not included above.
+The actual user's critical installer error was not reproduced by running a real installer or joining with a live account. These changes protect AzureDeck from repeated attempts and stale/incomplete local player selection; local checks do not prove every asset is intact, repair Roblox or bypass required Roblox updates. A remaining official-installer failure needs the repair/recheck workflow described in docs/RELEASE-1.9.8.md. Live Discord delivery, real browser sign-in, in-game Anti-AFK and live multi-account joins were not exercised. The ten-client native Roblox Home logout remains unproven fixed. WebView2 and the full cleanup probe were not rerun because their implementations were not changed.
 
-Local logs relative to the original workspace: work/build-v1.9.7.log, work/build-v1.9.7-ui-final.log, work/ui-v1.9.7-final.log and work/updater-restart-v1.9.7.log. Raw logs, synthetic test data and screenshots are excluded from source/release archives. Smoke page/action instructions are in CONTINUATION.md. See docs/RELEASE-1.9.7.md for user-facing changes.
+Local evidence relative to the original workspace: work/build-v1.9.8-complete.log, work/ui-v1.9.8-final.log, work/window-monitor-v1.9.8-repeat.log and work/updater-restart-v1.9.8.log. Initial run: work/window-monitor-v1.9.8.log. Raw logs, fixture data and screenshots are excluded from source/release archives. Source/native-probe details are in CONTINUATION.md.

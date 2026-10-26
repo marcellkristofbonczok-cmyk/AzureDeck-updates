@@ -1,11 +1,13 @@
-# AzureDeck 1.9.7 — Direct group selection and organized Settings
+# AzureDeck 1.9.8 — Stop repeated Roblox installer failures
 
-Open Accounts > Manage groups and choose a group. Its own searchable account selector lists all accounts; tick a row to add it or untick to remove it from just that group. Filters show all accounts, members or nonmembers. Other memberships stay saved, and changes do not alter the main account selection. Rows align the checkbox with a two-line account name and ID; long text stays within the row and is available on hover. The list is virtualized for larger libraries.
+An installer/critical-settings failure now blocks further native launch attempts instead of repeating that failure for every account. The queue stops with honest confirmed/failed/unattempted counts, keeps unattempted accounts queued, and remembers the installation block across app restarts. Automatic recovery also waits. Repeating a blocked batch returns promptly.
 
-The group menu closes with an X in its header. New group, Rename and Delete are compact secondary popups beneath the selector. The former selected-account add/remove actions and bottom Close button are removed. Deleting a group still keeps accounts and their other memberships.
+The manager chooses the newest complete installed player by executable version; an older registered path no longer overrides a newer complete bundle. Launch preflight checks for required player files, open installers and files still being written before obtaining tickets or replacing a client. Normal direct-player launching remains in use.
 
-Settings now has nine categories: General, Appearance, Launch & recovery, Window monitoring, Resources & alerts, Anti-AFK, Hotkeys, Data & config and App updates. A category rail appears in wider windows; narrower windows use a dropdown. Each category has its own scrollable editor and clear section labels. All existing settings, transfer tools, backup actions and automatic saving are retained. Clipboard config controls are now in Settings > Data & config. Color palettes are also selectable in the Appearance category.
+Startup follows installer child processes even when the original player exits. Such a handoff is not counted as a game launch. Critical-settings errors no longer trigger repeated automatic restarts. Only the failed new player uses the existing owned-process cleanup; installer processes and other working clients are not globally terminated.
 
-Page changes reset the shared content scroll position. Settings uses one editor scrollbar rather than an additional outer page scrollbar. Controls fit at 100% and 150% text scale and the standard minimum window size.
+If blocked, finish or repair Roblox and close the installer/error windows. Open Settings > Launch & recovery > Recheck installation, or use the same button in the Launch center. A successful recheck clears the installation pause so you can retry selected accounts. It checks local readiness; it does not repair missing assets, bypass Roblox's required updates or confirm an online join.
 
-See VALIDATION.md for executed checks and remaining live-test limitations. No live Discord messages or Roblox game joins were used to validate this UI update.
+If the official installer still fails independently of AzureDeck, follow [Roblox's desktop troubleshooting guide](https://en.help.roblox.com/hc/en-us/articles/203312870-General-Desktop-Roblox-Issues). Roblox also documents the [infinite installation loop](https://en.help.roblox.com/hc/en-us/articles/203312940-Infinite-Getting-Latest-Roblox-Loop) as an installation problem.
+
+See VALIDATION.md for executed synthetic process, batch, native monitoring, updater and UI checks. No live account was launched and the user's failing installer was not reproduced by running a real installer during validation.
