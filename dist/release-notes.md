@@ -1,15 +1,22 @@
-AzureDeck 1.9.4
+AzureDeck 1.9.5 — Discord control center and account groups
 
-- Fix disconnect monitoring for error 769, 278 and 267, including OCR reading OK as 0k.
-- Fix a WinRT capture-worker crash; retain account log matching after teleports and support larger batches of fresh logs.
-- Keep automatic potato sizing at least 640x360 while detection is on. Show when detection/recovery prerequisites are disabled.
-- Randomize each client's Anti-AFK jump/activity interval independently between 1 and 10 minutes, including retries.
-- Space native launches at least five seconds apart. Obtain a replacement ticket before closing an existing client; report native Roblox profile/session rejection without deleting saved sessions.
-- Keep kick/ban codes 267/600 detectable without automatically rejoining them.
-- Include the imported 1.9.3 UI, graphics, clipboard and session-transfer improvements.
+- Use account names, group:<name>, or all consistently for account actions. Add quoted names, per-user numbered pickers and paginated account/group/resource cards.
+- Create persistent account groups, assign selected/multiple accounts, rename groups and delete groups while keeping the accounts. Manage them from the desktop or Discord.
+- Add remote saved-destination launch, browser requests, restore/optimize/arrange/inspect, recovery/exclusion/favorite/nickname/destination controls, queue actions, Anti-AFK, themes, preferences and validated non-secret settings.
+- Replace plain responses with blue/amber/red Discord cards. Long operations update one progress message while status, selection and queue commands remain responsive. Fall back to text if Embed Links is missing.
+- Sync remote changes with desktop controls without overwriting unrelated local drafts. Keep credentials, private setting URLs and screenshot consent local. Preserve silent connection and existing channel/user authorization.
 
-535 automated/native regression checks passed, including rendered OCR fixtures for all three requested codes, plus read-only stored-session identity verification. Existing encrypted accounts/settings are preserved.
+591 regression checks passed, including synthetic Discord transport tests, account/group persistence, native targeted monitoring and updater replacement/restart. Live Discord delivery and live Roblox joins were not tested.
 
-After updating: Settings > Window Monitoring > Check clients now enables detection. Enable Prevent Minimization for screen checks of minimized clients. Automatic rejoin also requires global recovery and the account's own recovery switch.
+After updating, reconnect the bot and send !help or !select. Examples:
+!group create Farm
+!group add Farm Alpha Beta
+!join group:Farm <Roblox-link>
+!launch group:Farm
+!stop all
+!settings set disconnectDetection on
+!afk on
 
-Ten-client native Roblox Home logouts/teleports are not proven fixed; pacing, safer replacement and diagnostics are mitigations. Live multi-account joins and in-game Anti-AFK were not tested. Random timing does not guarantee undetectable automation.
+Command guide: https://github.com/marcellkristofbonczok-cmyk/AzureDeck-updates/blob/main/docs/DISCORD-REMOTE.md
+
+The prior ten-client native Roblox Home logout remains unproven fixed.
