@@ -2,9 +2,9 @@
   "schema": 1,
   "product": "AzureDeck",
   "architecture": "x64",
-  "version": "1.8.3",
-  "url": "https://github.com/marcellkristofbonczok-cmyk/AzureDeck-updates/releases/download/v1.8.3/AzureDeck.exe",
-  "sha256": "ddd54ebca7887b629c25ff2bc92aa1caea35a819bc0c5643390bce79faa53600",
-  "size": 2333696,
-  "notes": "AzureDeck 1.8.3\n\n- Fix cross-account cookie reuse: isolate every HTTP request and verify account identity before requesting a launch ticket.\n- Preserve live clients on ordinary Launch; protect recovery against stale or duplicate requests. Use Rejoin explicitly to replace a client.\n- Stop automatic window shrinking by default; make 640x360 resizing optional.\n- Autosave settings, hotkeys, encrypted Discord fields and FPS without Save buttons. FPS applies at the next launch after all clients close.\n- Add Copy config and Import config from clipboard in Settings. Credentials, account sessions, private links and the update source remain local.\n\n506 regression checks passed, plus read-only stored-session identity verification. Install through Settings > App updates; existing account data is preserved."
+  "version": "1.9.4",
+  "url": "https://github.com/marcellkristofbonczok-cmyk/AzureDeck-updates/releases/download/v1.9.4/AzureDeck.exe",
+  "sha256": "3d6d8b9ad5cde906e84d86f80deb28d177cd86f0b27e3b1e732fdafef7019b38",
+  "size": 2429952,
+  "notes": "AzureDeck 1.9.4\n\n- Fix disconnect monitoring for error 769, 278 and 267, including OCR reading OK as 0k.\n- Fix a WinRT capture-worker crash; retain account log matching after teleports and support larger batches of fresh logs.\n- Keep automatic potato sizing at least 640x360 while detection is on. Show when detection/recovery prerequisites are disabled.\n- Randomize each client's Anti-AFK jump/activity interval independently between 1 and 10 minutes, including retries.\n- Space native launches at least five seconds apart. Obtain a replacement ticket before closing an existing client; report native Roblox profile/session rejection without deleting saved sessions.\n- Keep kick/ban codes 267/600 detectable without automatically rejoining them.\n- Include the imported 1.9.3 UI, graphics, clipboard and session-transfer improvements.\n\n535 automated/native regression checks passed, including rendered OCR fixtures for all three requested codes, plus read-only stored-session identity verification. Existing encrypted accounts/settings are preserved.\n\nAfter updating: Settings > Window Monitoring > Check clients now enables detection. Enable Prevent Minimization for screen checks of minimized clients. Automatic rejoin also requires global recovery and the account's own recovery switch.\n\nTen-client native Roblox Home logouts/teleports are not proven fixed; pacing, safer replacement and diagnostics are mitigations. Live multi-account joins and in-game Anti-AFK were not tested. Random timing does not guarantee undetectable automation."
 }

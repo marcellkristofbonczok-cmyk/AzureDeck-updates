@@ -16,6 +16,10 @@ For AzureDeck 1.8, paste that URL into **Settings > App updates > Update manifes
 
 Updates are checked on startup and every six hours when enabled. A new version is published only after it is built and tested; connecting GitHub does not generate app changes automatically.
 
+## 1.9.4 changes
+
+Disconnect monitoring now covers 769, 278 and 267, Anti-AFK uses independent random 1–10 minute intervals, and launch/session handling is more defensive. 535 regression checks passed. Ten-client native Roblox Home authentication remains unproven; see [release details](docs/RELEASE-1.9.4.md) and [validation](VALIDATION.md).
+
 ## Publishing the next version
 
 1. Build and test a version newer than the current release.
