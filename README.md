@@ -16,6 +16,10 @@ For AzureDeck 1.8, paste that URL into **Settings > App updates > Update manifes
 
 Updates are checked on startup and every six hours when enabled. A new version is published only after it is built and tested; connecting GitHub does not generate app changes automatically.
 
+## 1.9.10 changes
+
+Startup now waits for the player and matching join evidence before classifying installer handoffs. A normal helper name cannot fail a live startup; replacement player children are tracked. Automatic recovery prepares a signed official installer, deletes the entire native **%LOCALAPPDATA%\\Roblox** folder, reinstalls Player, waits, and retries the selected batch. **This removes Studio's installation/settings/cache and all other data in that folder; Player alone is reinstalled. Close Studio first.** AzureDeck data outside Roblox is protected. One clean attempt is allowed per episode; failed cleanup/reinstall keeps launches blocked. **692 compiled/native/download checks and eight UI previews passed.** Tests used temporary cleanup folders; real Roblox was not deleted and the real installer was not run. See [release details](docs/RELEASE-1.9.10.md) and [validation](VALIDATION.md).
+
 ## 1.9.9 changes
 
 Automatic recovery now closes verified Roblox players, releases compatibility, updates and retries. If updating fails or the retried client still fails, it downloads and verifies a fresh official Roblox installer, reinstalls, and retries again. The selected batch is rebuilt after recovery. Saved AzureDeck data stays intact; failed fresh reinstall leaves launches blocked. Recovery runs in the background with progress, cancellation and a persistent two-phase limit. The automatic setting is on by default under **Settings > Launch & recovery**. **668 compiled/native/download checks and eight final UI previews passed.** The real installer was not executed during validation. See [release details](docs/RELEASE-1.9.9.md) and [validation](VALIDATION.md).
