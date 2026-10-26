@@ -16,6 +16,10 @@ For AzureDeck 1.8, paste that URL into **Settings > App updates > Update manifes
 
 Updates are checked on startup and every six hours when enabled. A new version is published only after it is built and tested; connecting GitHub does not generate app changes automatically.
 
+## 1.9.11 changes
+
+Modern installer Critical Error dialogs and temporary helper errors are now detected. Failed installers close automatically, with verified forced closure after ten seconds if graceful exit fails. Recovery reruns a fresh official launcher to update first; if that update or its next client launch still fails, it performs the full clean reinstall and retries. Failure after both attempts completes the waiting launch and shows a clear needs-attention status. The clean fallback still removes Studio/local Roblox data and reinstalls Player only. **711 compiled/native checks and eight UI previews passed**, including modern TaskDialog, stubborn-installer termination and unrelated healthy-updater protection. Real installers were not run or closed during validation. See [release details](docs/RELEASE-1.9.11.md) and [validation](VALIDATION.md).
+
 ## 1.9.10 changes
 
 Startup now waits for the player and matching join evidence before classifying installer handoffs. A normal helper name cannot fail a live startup; replacement player children are tracked. Automatic recovery prepares a signed official installer, deletes the entire native **%LOCALAPPDATA%\\Roblox** folder, reinstalls Player, waits, and retries the selected batch. **This removes Studio's installation/settings/cache and all other data in that folder; Player alone is reinstalled. Close Studio first.** AzureDeck data outside Roblox is protected. One clean attempt is allowed per episode; failed cleanup/reinstall keeps launches blocked. **692 compiled/native/download checks and eight UI previews passed.** Tests used temporary cleanup folders; real Roblox was not deleted and the real installer was not run. See [release details](docs/RELEASE-1.9.10.md) and [validation](VALIDATION.md).
