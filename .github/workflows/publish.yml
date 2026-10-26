@@ -28,6 +28,16 @@ jobs:
           $tag = 'v' + $m.version
           $expected = "https://github.com/$env:GITHUB_REPOSITORY/releases/download/$tag/AzureDeck.exe"
           if ($m.url -ne $expected) { throw 'Manifest URL does not match this repository and version.' }
+          $payloadDirectory = Join-Path 'dist' ('payload-' + $m.version)
+          if (Test-Path -LiteralPath $payloadDirectory -PathType Container) {
+            $encoded = (Get-ChildItem -LiteralPath $payloadDirectory -File -Filter '*.b64' | Sort-Object Name | ForEach-Object { [IO.File]::ReadAllText($_.FullName) }) -join ''
+            if (!$encoded) { throw 'Empty release payload.' }
+            $zipPath = Join-Path $env:RUNNER_TEMP 'AzureDeck-payload.zip'
+            $unpacked = Join-Path $env:RUNNER_TEMP 'AzureDeck-payload'
+            [IO.File]::WriteAllBytes($zipPath, [Convert]::FromBase64String($encoded))
+            Expand-Archive -LiteralPath $zipPath -DestinationPath $unpacked -Force
+            Copy-Item -LiteralPath (Join-Path $unpacked 'AzureDeck.exe') -Destination 'dist/AzureDeck.exe'
+          }
           $file = Get-Item -LiteralPath dist/AzureDeck.exe
           if ($m.size -ne $file.Length -or $file.Length -gt 67108864) { throw 'Release size mismatch.' }
           if ((Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant() -ne $m.sha256) { throw 'Release SHA-256 mismatch.' }

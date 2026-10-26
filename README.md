@@ -16,6 +16,10 @@ For AzureDeck 1.8, paste that URL into **Settings > App updates > Update manifes
 
 Updates are checked on startup and every six hours when enabled. A new version is published only after it is built and tested; connecting GitHub does not generate app changes automatically.
 
+## 1.9.7 changes
+
+Group management now has its own searchable tick/untick account selector, aligned name/ID rows and a header X. Settings is organized into nine categories with a responsive rail/dropdown and independent editors. Config transfer is under **Settings > Data & config**. **568 compiled/native checks and 42 final app preview/interaction cases passed.** See [release details](docs/RELEASE-1.9.7.md) and [validation](VALIDATION.md).
+
 ## 1.9.6 changes
 
 Accounts retain multiple group memberships. Use Accounts > Manage groups to remove selected or individual members from just one group. Add account and scrollbars now stay within padded content; controls wrap and layouts adapt at smaller window sizes and larger text. Copy config uses verified native Unicode clipboard writes and transfers all app settings, private URLs and layouts; account sessions and Discord sign-in stay separate. **606 compiled/native checks passed**, plus 32 final layout/scroll preview cases. See [release details](docs/RELEASE-1.9.6.md) and [validation](VALIDATION.md).

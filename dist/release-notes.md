@@ -1,20 +1,11 @@
-# AzureDeck 1.9.6 — Multiple groups, fitted UI and working config copying
+# AzureDeck 1.9.7 — Direct group selection and organized Settings
 
-Accounts retain all their groups when added to another. Open Accounts > Manage groups to remove selected accounts from just the chosen group or remove one member beside its name. Existing single-group records migrate automatically. There is no fixed membership/catalog count limit; names and overall workspace storage retain their validation bounds.
+Open Accounts > Manage groups and choose a group. Its own searchable account selector lists all accounts; tick a row to add it or untick to remove it from just that group. Filters show all accounts, members or nonmembers. Other memberships stay saved, and changes do not alter the main account selection. Rows align the checkbox with a two-line account name and ID; long text stays within the row and is available on hover. The list is virtualized for larger libraries.
 
-Discord examples:
+The group menu closes with an X in its header. New group, Rename and Delete are compact secondary popups beneath the selector. The former selected-account add/remove actions and bottom Close button are removed. Deleting a group still keeps accounts and their other memberships.
 
-```text
-!group add Farm Alpha Beta
-!group add Trading Alpha
-!group remove Farm Alpha
-!group clear account:Beta
-```
+Settings now has nine categories: General, Appearance, Launch & recovery, Window monitoring, Resources & alerts, Anti-AFK, Hotkeys, Data & config and App updates. A category rail appears in wider windows; narrower windows use a dropdown. Each category has its own scrollable editor and clear section labels. All existing settings, transfer tools, backup actions and automatic saving are retained. Clipboard config controls are now in Settings > Data & config. Color palettes are also selectable in the Appearance category.
 
-Adding Alpha to Trading keeps Farm. Removing Alpha from Farm keeps Trading. Clear explicitly removes every membership for its targets. Rename/delete, selectors, counts, search, sorting and account labels handle multiple memberships. Group management does not delete accounts or their sessions.
+Page changes reset the shared content scroll position. Settings uses one editor scrollbar rather than an additional outer page scrollbar. Controls fit at 100% and 150% text scale and the standard minimum window size.
 
-The Accounts header and content panels now honor their padding. Add account and scrollbars sit clear of the native resize border. Wider scrollbars, wrapped controls and labels, adaptive metric columns/launch panels, scroll chaining and extra bottom space improve navigation at smaller window sizes and 150% text scale.
-
-Copy config creates and verifies a native Unicode clipboard payload using an owner window. Version 2 includes every app setting and appearance/performance preference, including private server/webhook URLs, update source, selections, hotkeys and saved layouts. Keep this JSON private. Imports validate everything before applying and support old version-1 exports. Account sessions, account metadata/group memberships and Discord bot sign-in are separate. Sign in on the destination device or use the existing account/session transfer tools. Stored window layouts apply to matching account IDs.
-
-See root VALIDATION.md for the executed checks. Live Discord delivery and live Roblox game joins were not exercised. The existing ten-client native Roblox Home logout remains unproven fixed.
+See VALIDATION.md for executed checks and remaining live-test limitations. No live Discord messages or Roblox game joins were used to validate this UI update.
