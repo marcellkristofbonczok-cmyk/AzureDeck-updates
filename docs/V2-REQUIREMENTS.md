@@ -1,5 +1,7 @@
 # v2 requirements coverage and investigation
 
+Current behavior is refined in RELEASE-2.0.1.md: fresh validated launcher references and full channel/version checks, stable active cohorts, fatal/healthy updater separation, bounded retry/resume/replay, and account-matched channel diagnostics. The final user brief rejects timestamp-based selection and prioritizes preserving healthy sessions.
+
 | Requested area | Implementation/evidence | Practical limit |
 | --- | --- | --- |
 | Development autonomy | Implemented, built and tested in the supplied workspace; release workflow publishes verified artifacts. | No OS security prompt bypass or assumed external approval. |
