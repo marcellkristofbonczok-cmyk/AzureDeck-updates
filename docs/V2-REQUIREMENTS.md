@@ -19,3 +19,7 @@ Current behavior is refined in RELEASE-2.0.1.md: fresh validated launcher refere
 | Final delivery | v2.0.0 executable/resource/manifest, source package, release notes and continuation documentation. | Publication is confirmed only after the GitHub workflow and anonymous asset verification. |
 
 Bloxstrap's own documentation explains that current Player builds process launch URIs and may start RobloxPlayerInstaller when an update is required, even when launched directly. See https://github.com/bloxstraplabs/bloxstrap/wiki/A-deep-dive-on-how-the-Roblox-bootstrapper-works and the upstream Bootstrapper implementation at https://github.com/bloxstraplabs/bloxstrap/blob/v2.11.4/Bloxstrap/Bootstrapper.cs. Registration mismatch is inspected but does not select an arbitrary executable in AzureDeck's direct path. Account-specific native Home authentication with many clients remains an unverified separate platform issue.
+
+## 2.0.2 correction to channel/cohort interpretation
+
+Saved engine update-query channels are diagnostic hints, not persistent account assignments. Current launcher/reference selection governs launches. Different installed GUIDs do not alone prove process incompatibility: a separate complete bundle matching current deployment metadata can launch without switching the primary live pin or global channel. Missing/unverified builds still wait for safe maintenance. Real mixed-build gameplay/server compatibility is not guaranteed or claimed tested.

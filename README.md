@@ -16,6 +16,10 @@ For AzureDeck 1.8, paste that URL into **Settings > App updates > Update manifes
 
 Updates are checked on startup and every six hours when enabled. A new version is published only after it is built and tested; connecting GitHub does not generate app changes automatically.
 
+## 2.0.2 changes
+
+Fixes accounts skipped by the 2.0.1 channel check. Historical engine-query channels no longer select a build or trigger installation. Independently validated, already-installed deployments can launch alongside healthy clients without changing the primary live pin or global channel. Missing or mismatched builds still wait for safe maintenance. **841 checks passed**; live mixed-build gameplay and genuine reinstall recovery were not exercised. Update and retry skipped accounts; saved accounts remain compatible. Read [release details](docs/RELEASE-2.0.2.md) and [validation](VALIDATION.md).
+
 ## 2.0.1 changes
 
 Fresh Player selection validates launcher references, full executable versions and channel deployment metadata without using folder timestamps as the selection rule. Complete-bundle/reference changes invalidate stale metadata immediately, and active accounts keep a validated cohort. Account-matched channel observations and detailed selection reasons are included in diagnostic export. Fatal installer errors require supported repair; compatibility restores before retrying, Studio/console bookkeeping is excluded, dependency waits retain the queue, and repeated startup/timeout/maintenance replay is bounded. **875 regression/native/inspection checks and eight final UI previews passed.** Tests use synthetic accounts and controlled processes; real account/installer execution and guaranteed uninterrupted platform operation are not claimed. See [release details](docs/RELEASE-2.0.1.md) and [validation](VALIDATION.md).
