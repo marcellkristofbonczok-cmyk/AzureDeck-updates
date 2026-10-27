@@ -16,6 +16,10 @@ For AzureDeck 1.8, paste that URL into **Settings > App updates > Update manifes
 
 Updates are checked on startup and every six hours when enabled. A new version is published only after it is built and tested; connecting GitHub does not generate app changes automatically.
 
+## 1.9.13 changes
+
+Choose **Roblox** or **Bloxstrap** in Accounts > Launch center or Settings > Launch & recovery. Both show actual installed-app icons and installed/missing status; an unavailable choice cannot overwrite the current selection. The choice saves automatically, and each backend has independent repair protection. New default-on global switches rejoin unexpected crashes and persistent Unknown clients with a grace period, cooldown and per-incident retry cap. Stable health resets that cap; offline waits do not burn attempts. In-app stops and queue cancellation invalidate recovery. **776 regression/native/inspection checks and eight final UI previews passed**, including real watchdog tests with synthetic accounts/launch callbacks. No live account or real installer was executed during validation. See [release details](docs/RELEASE-1.9.13.md) and [validation](VALIDATION.md).
+
 ## 1.9.12 changes
 
 Launching/rejoining and recovery now use **%LOCALAPPDATA%\Bloxstrap\Bloxstrap.exe** for the current Windows user. Install and finish Bloxstrap setup first. AzureDeck prepares updates before requesting fresh account tickets, sends account-specific public/private-server launch URIs, and tracks the actual player through an owned process job and matching join logs. Cancelled/timed-out jobs remain tracked to prevent duplicates. Recovery asks Bloxstrap to update, then force-reinstall its managed Player if needed; AzureDeck no longer deletes the Roblox folder or uses its stock installer. Settings includes launcher setup links, and potato flags use Bloxstrap's persistent modifications folder. **740 regression/inspection/artifact checks and eight UI previews passed.** Real Bloxstrap/game launches were not executed during validation. See [release details](docs/RELEASE-1.9.12.md) and [validation](VALIDATION.md).
